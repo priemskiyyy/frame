@@ -1,0 +1,79 @@
+{
+  "name": "@priemskiyyy/frame",
+  "version": "0.1.0",
+  "description": "Typed, provider-independent widget publication for React Native: one definition, validated display data, ordered writes, outcomes that say only what is known, account boundaries, and a small adapter contract for Expo, Voltra and Android widgets.",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/priemskiyyy/frame.git",
+    "directory": "packages/core"
+  },
+  "bugs": {
+    "url": "https://github.com/priemskiyyy/frame/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./adapter": {
+      "types": "./dist/adapter.d.ts",
+      "import": "./dist/adapter.js",
+      "default": "./dist/adapter.js"
+    },
+    "./mock": {
+      "types": "./dist/mock.d.ts",
+      "import": "./dist/mock.js",
+      "default": "./dist/mock.js"
+    },
+    "./testing": {
+      "types": "./dist/testing.d.ts",
+      "import": "./dist/testing.js",
+      "default": "./dist/testing.js"
+    }
+  },
+  "scripts": {
+    "build": "tsdown",
+    "prepack": "node ../../scripts/assert-built.mjs",
+    "lint:typescript": "tsc --noEmit -p .",
+    "lint:eslint": "eslint src",
+    "test:unit": "vitest run --root ../.. --project core"
+  },
+  "keywords": [
+    "widgets",
+    "home-screen-widget",
+    "widgetkit",
+    "react-native",
+    "expo",
+    "voltra",
+    "typescript",
+    "frame"
+  ],
+  "homepage": "https://github.com/priemskiyyy/frame/tree/main/packages/core#readme",
+  "typesVersions": {
+    "*": {
+      "adapter": [
+        "dist/adapter.d.ts"
+      ],
+      "mock": [
+        "dist/mock.d.ts"
+      ],
+      "testing": [
+        "dist/testing.d.ts"
+      ]
+    }
+  }
+}
