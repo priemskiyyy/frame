@@ -1,0 +1,13 @@
+pnpm-lock.yaml
+dist
+node_modules
+coverage
+.idea
+.artifacts
+.expo
+tasks
+docs/.vitepress/dist
+docs/.vitepress/cache
+test-results
+playwright-report
+examples/expo/src/uniwind-types.d.ts
