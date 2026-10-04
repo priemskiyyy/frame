@@ -1,0 +1,15 @@
+@import "tailwindcss";
+@import "uniwind";
+
+/* Native has no CSS font stack, so each platform names one monospace face. */
+@layer theme {
+  :root {
+    @variant ios {
+      --font-mono: Menlo;
+    }
+
+    @variant android {
+      --font-mono: monospace;
+    }
+  }
+}
