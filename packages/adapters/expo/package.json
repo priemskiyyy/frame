@@ -1,0 +1,68 @@
+{
+  "name": "@priemskiyyy/frame-expo",
+  "version": "0.1.0",
+  "description": "Expo Widgets adapter for frame: typed publication into iOS home screen widgets over the expo-widgets you inject, with timelines, reload and readback.",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/priemskiyyy/frame.git",
+    "directory": "packages/adapters/expo"
+  },
+  "bugs": {
+    "url": "https://github.com/priemskiyyy/frame/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsdown",
+    "prepack": "node ../../../scripts/assert-built.mjs",
+    "lint:typescript": "tsc --noEmit -p .",
+    "lint:eslint": "eslint src",
+    "test:unit": "vitest run --root ../../.. --project expo"
+  },
+  "peerDependencies": {
+    "@priemskiyyy/frame": ">=0.1.0 <0.2",
+    "@types/react": ">=19.2.0 <20",
+    "expo-widgets": ">=57.0.22 <58"
+  },
+  "peerDependenciesMeta": {
+    "@types/react": {
+      "optional": true
+    },
+    "expo-widgets": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@priemskiyyy/frame": "workspace:*"
+  },
+  "keywords": [
+    "expo",
+    "expo-widgets",
+    "widgetkit",
+    "ios",
+    "home-screen-widget",
+    "react-native",
+    "typescript",
+    "frame",
+    "adapter"
+  ],
+  "homepage": "https://github.com/priemskiyyy/frame/tree/main/packages/adapters/expo#readme"
+}
