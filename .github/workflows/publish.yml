@@ -1,0 +1,63 @@
+name: publish
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.18
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm check:release
+      # The release tag is `v<version>`; the script refuses a tag that disagrees with the manifests.
+      - run: node scripts/verify-release.mjs
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+      - name: Pack every package once, and checksum what was verified
+        run: |
+          mkdir release
+          pnpm -r --filter "./packages/**" pack --pack-destination "$PWD/release"
+          cd release
+          sha256sum ./*.tgz > SHA256SUMS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: release
+          path: release
+
+  publish:
+    needs: verify
+    runs-on: ubuntu-latest
+    environment: npm
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+      - uses: actions/download-artifact@v4
+        with:
+          name: release
+          path: release
+      - name: Publish the verified tarballs, the core first
+        working-directory: release
+        env:
+          NPM_TAG: ${{ github.event.release.prerelease && 'next' || 'latest' }}
+        run: |
+          sha256sum --check SHA256SUMS
+          for name in frame frame-react frame-expo frame-voltra-ios frame-android-widget; do
+            npm publish "./priemskiyyy-$name-"[0-9]*.tgz --access public --provenance --tag "$NPM_TAG"
+          done
