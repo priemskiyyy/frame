@@ -1,0 +1,56 @@
+{
+  "name": "@priemskiyyy/frame-react",
+  "version": "0.1.0",
+  "description": "React hooks for Frame: observe a widget without publishing, opening an adapter or calling a provider, safe in Strict Mode and on the server.",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/priemskiyyy/frame.git",
+    "directory": "packages/react"
+  },
+  "bugs": {
+    "url": "https://github.com/priemskiyyy/frame/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsdown",
+    "prepack": "node ../../scripts/assert-built.mjs",
+    "lint:typescript": "tsc --noEmit -p .",
+    "lint:eslint": "eslint src",
+    "test:unit": "vitest run --root ../.. --project react"
+  },
+  "peerDependencies": {
+    "react": ">=19.2.0 <20",
+    "@priemskiyyy/frame": ">=0.1.0 <0.2"
+  },
+  "devDependencies": {
+    "@priemskiyyy/frame": "workspace:*"
+  },
+  "keywords": [
+    "react",
+    "react-native",
+    "hooks",
+    "widgets",
+    "typescript",
+    "frame"
+  ],
+  "homepage": "https://github.com/priemskiyyy/frame/tree/main/packages/react#readme"
+}
