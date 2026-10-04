@@ -1,0 +1,34 @@
+{
+  "expo": {
+    "name": "Frame Studio",
+    "slug": "frame-studio",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "bundleIdentifier": "dev.frame.studio"
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "single"
+    },
+    "plugins": [
+      [
+        "expo-widgets",
+        {
+          "bundleIdentifier": "dev.frame.studio.widgets",
+          "groupIdentifier": "group.dev.frame.studio",
+          "widgets": [
+            {
+              "name": "StreakWidget",
+              "displayName": "Habit streak",
+              "description": "Your streak at a glance, published through Frame.",
+              "supportedFamilies": ["systemSmall", "systemMedium"],
+              "contentMarginsDisabled": false
+            }
+          ]
+        }
+      ]
+    ]
+  }
+}
