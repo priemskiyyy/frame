@@ -1,0 +1,71 @@
+{
+  "name": "@priemskiyyy/frame-voltra-ios",
+  "version": "0.1.0",
+  "description": "Voltra iOS payload adapter for frame: typed publication into iOS home screen widgets over the @use-voltra/ios-client you inject, with timelines and reload.",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/priemskiyyy/frame.git",
+    "directory": "packages/adapters/voltra-ios"
+  },
+  "bugs": {
+    "url": "https://github.com/priemskiyyy/frame/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsdown",
+    "prepack": "node ../../../scripts/assert-built.mjs",
+    "lint:typescript": "tsc --noEmit -p .",
+    "lint:eslint": "eslint src",
+    "test:unit": "vitest run --root ../../.. --project voltra-ios"
+  },
+  "peerDependencies": {
+    "@priemskiyyy/frame": ">=0.1.0 <0.2",
+    "@types/react": ">=19.2.0 <20",
+    "@use-voltra/ios": ">=2.3.2 <3",
+    "@use-voltra/ios-client": ">=2.3.2 <3"
+  },
+  "peerDependenciesMeta": {
+    "@types/react": {
+      "optional": true
+    },
+    "@use-voltra/ios": {
+      "optional": true
+    },
+    "@use-voltra/ios-client": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@priemskiyyy/frame": "workspace:*"
+  },
+  "keywords": [
+    "voltra",
+    "widgetkit",
+    "ios",
+    "home-screen-widget",
+    "react-native",
+    "typescript",
+    "frame",
+    "adapter"
+  ],
+  "homepage": "https://github.com/priemskiyyy/frame/tree/main/packages/adapters/voltra-ios#readme"
+}
