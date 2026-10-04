@@ -1,0 +1,26 @@
+name: Bug report
+description: Something Frame did, or did not do, that it should have.
+labels: [bug]
+body:
+  - type: textarea
+    attributes:
+      label: What happened
+      description: The outcome Frame answered (its `status`, `request.id` and `reason`), and what you expected instead.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Reproduction
+      description: The smallest code that shows it. A test over the mock adapter is ideal.
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Versions
+      description: Frame, the adapter, its SDK, React Native or Expo, and the platform.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Diagnostics
+      description: The `frame.diagnostics` events around the request. They never carry a value you published.
