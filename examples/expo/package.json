@@ -1,0 +1,50 @@
+{
+  "name": "example-expo",
+  "private": true,
+  "version": "0.1.0",
+  "main": "index.tsx",
+  "scripts": {
+    "dev": "expo start",
+    "web": "expo start --web",
+    "ios": "expo run:ios",
+    "build": "expo export --platform web --output-dir dist",
+    "build:native": "expo export --platform ios --output-dir ../../.artifacts/expo-native --max-workers 2",
+    "lint:typescript": "tsc --noEmit -p .",
+    "check:dependencies": "expo install --check"
+  },
+  "dependencies": {
+    "@expo/metro-runtime": "57.0.16",
+    "@expo/ui": "57.0.21",
+    "@priemskiyyy/frame": "workspace:*",
+    "@priemskiyyy/frame-expo": "workspace:*",
+    "@priemskiyyy/frame-react": "workspace:*",
+    "class-variance-authority": "0.7.1",
+    "clsx": "2.1.1",
+    "expo": "57.0.26",
+    "expo-haptics": "~57.0.3",
+    "expo-status-bar": "57.0.1",
+    "expo-widgets": "57.0.22",
+    "phosphor-react-native": "3.0.6",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "react-native": "0.86.3",
+    "react-native-safe-area-context": "5.7.0",
+    "react-native-svg": "15.15.4",
+    "react-native-web": "0.21.2",
+    "ts-pattern": "5.9.0",
+    "uniwind": "1.12.0",
+    "zod": "4.1.12"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.17",
+    "tailwindcss": "4.3.3",
+    "typescript": "5.8.3"
+  },
+  "expo": {
+    "install": {
+      "exclude": [
+        "typescript"
+      ]
+    }
+  }
+}
