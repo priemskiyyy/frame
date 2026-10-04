@@ -1,0 +1,18 @@
+packages:
+  - packages/*
+  - packages/adapters/*
+  - examples/*
+
+# A release younger than a day is not installed, so a compromised publish has
+# time to be caught before it reaches this workspace.
+minimumReleaseAge: 1440
+
+# A transitive dependency cannot come from a git or tarball URL, and an
+# install script nobody listed under allowBuilds fails the install.
+blockExoticSubdeps: true
+strictDepBuilds: true
+
+allowBuilds:
+  # The provider SDKs are here for their types and tests only. None of their
+  # install scripts, binaries or generated code is ever run.
+  esbuild: true
