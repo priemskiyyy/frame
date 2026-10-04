@@ -1,0 +1,67 @@
+{
+  "name": "@priemskiyyy/frame-android-widget",
+  "version": "0.1.0",
+  "description": "Android widget adapter for frame: typed publication into Android home screen widgets over the react-native-android-widget you inject, as a snapshot to every placed widget.",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/priemskiyyy/frame.git",
+    "directory": "packages/adapters/android-widget"
+  },
+  "bugs": {
+    "url": "https://github.com/priemskiyyy/frame/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsdown",
+    "prepack": "node ../../../scripts/assert-built.mjs",
+    "lint:typescript": "tsc --noEmit -p .",
+    "lint:eslint": "eslint src",
+    "test:unit": "vitest run --root ../../.. --project android-widget"
+  },
+  "peerDependencies": {
+    "@priemskiyyy/frame": ">=0.1.0 <0.2",
+    "@types/react": ">=19.2.0 <20",
+    "react-native-android-widget": ">=0.22.1 <0.23"
+  },
+  "peerDependenciesMeta": {
+    "@types/react": {
+      "optional": true
+    },
+    "react-native-android-widget": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@priemskiyyy/frame": "workspace:*"
+  },
+  "keywords": [
+    "android",
+    "android-widget",
+    "react-native-android-widget",
+    "home-screen-widget",
+    "react-native",
+    "typescript",
+    "frame",
+    "adapter"
+  ],
+  "homepage": "https://github.com/priemskiyyy/frame/tree/main/packages/adapters/android-widget#readme"
+}
