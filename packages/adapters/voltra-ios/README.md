@@ -2,6 +2,8 @@
 
 The Voltra iOS payload adapter for [frame](https://github.com/priemskiyyy/frame): it publishes typed, validated widget data to an iOS home screen widget through the `@use-voltra/ios-client` your application already set up. You write the Voltra JSX once as a `render` function from your data, and Frame calls `updateWidget`, `scheduleWidget` and `reloadWidgets` for you, in order, answering only what it knows. It covers Voltra's payload mode on iOS and nothing else: not Dynamic Widgets, not Live Activities, not Android.
 
+Version 0.1.0 is an initial preview. APIs may change before 1.0. See the [verification limits](https://github.com/priemskiyyy/frame/blob/main/docs/limitations.md) before adopting an adapter.
+
 ## Installation
 
 ```sh
@@ -104,7 +106,9 @@ These are Voltra's own limits, and Frame does not hide them.
 
 What ran: unit tests with an in-process fake of `@use-voltra/ios-client` 2.3.2 (its behavior off Apple, its persist then reload order, and its async functions are modelled on the 2.3.2 source), the shared conformance suite from `@priemskiyyy/frame/testing`, and type contracts compiled against the real installed `@use-voltra/ios-client` and `@use-voltra/ios` 2.3.2 types.
 
-What did not run: a native iOS build, the simulator, a device, WidgetKit, the Voltra native module and an app group. Nothing here shows that a widget was drawn, and the fake's account of the native side comes from reading the 2.3.2 source, not from running it.
+Native smoke check, 2026-10-30: the packed 0.1.0 candidate ran against the real 2.3.2 native module and App Group in an iOS 26.5 simulator development build. Snapshots, replacements, reload and a three-entry timeline returned `submitted`; duplicates answered `unchanged`, and invalid data answered `invalid`. The placed widget displayed the first and final timeline values while the application stayed in the background. Readback answered `unavailable`, as this adapter provides none. See the [native setup notes](https://github.com/priemskiyyy/frame/blob/main/docs/limitations.md#native-project-setup) for the combined test application.
+
+What did not run: a physical device, every widget family, long-term WidgetKit refresh budgets, Live Activities or Dynamic Widgets. The native smoke check is separate from the automated test suite.
 
 ## License
 

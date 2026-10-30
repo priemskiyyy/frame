@@ -2,6 +2,8 @@
 
 The Frame runtime: typed, validated, ordered publication of widget data, with outcomes that say only what is known. It has no dependencies and calls no provider by itself; an adapter does that, through the SDK your application already configured.
 
+Version 0.1.0 is an initial preview. APIs may change before 1.0. See the [verification limits](https://github.com/priemskiyyy/frame/blob/main/docs/limitations.md) before adopting an adapter.
+
 ## Installation
 
 ```sh

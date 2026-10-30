@@ -2,6 +2,8 @@
 
 iOS home screen widgets for Frame, over the `expo-widgets` you inject. You write the widget's layout once as a `render` function and Frame publishes typed, validated data to it: a snapshot, a whole schedule, a reload request and a readback of what the widget stores. Frame never initializes, configures or closes `expo-widgets`.
 
+Version 0.1.0 is an initial preview. APIs may change before 1.0. See the [verification limits](https://github.com/priemskiyyy/frame/blob/main/docs/limitations.md) before adopting an adapter.
+
 ## Installation
 
 ```sh
@@ -89,7 +91,7 @@ A throw from a write or a reload is never `failed` and never swallowed: effects 
 
 What ran: unit tests with an in-process fake modelled on `expo-widgets` 57.0.22 (a widget registers its layout when created, a snapshot is a one-entry timeline stamped with the time of the call, and every write asks for a reload), the shared conformance suite from `@priemskiyyy/frame/testing`, and type contracts compiled against the real installed `expo-widgets` and `@expo/ui` types.
 
-What ran on a device: the example app in `examples/expo` on an iOS simulator (iPhone 17, a development build), run by hand against the final runtime. A published streak appeared on the home screen widget and a second publish replaced it, publishing the same content again was answered `unchanged`, a timeline of three entries was submitted and the widget moved through it on its own while the app was in the background, a readback returned the three stored entries with nothing rejected, and a context change reset the widget. A reload request returned `submitted` in an earlier run, before the last runtime changes, and was not repeated. That is a hand run, not a test suite.
+What ran on a device: the example app in `examples/expo` on an iOS simulator (iPhone 17, a development build), run by hand against the final runtime. A published streak appeared on the home screen widget and a second publish replaced it, publishing the same content again was answered `unchanged`, a timeline of three entries was submitted and the widget moved through it on its own while the app was in the background, a readback returned the three stored entries with nothing rejected, and a context change reset the widget. On 2026-10-30, the packed 0.1.0 candidate repeated snapshot, replacement, duplicate refusal, schema validation, reload, readback and timeline publication in a fresh development build on an iPhone 17 Pro simulator running iOS 26.5. Reload returned `submitted`, readback returned the replacement value, and the final scheduled value was visibly rendered. These are manual runs, not a test suite.
 
 What did not run: a physical device, WidgetKit's refresh budget over time, Android and the web with the stub, and a widget placed in more than one family at once.
 

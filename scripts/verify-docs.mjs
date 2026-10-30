@@ -62,7 +62,6 @@ for (const file of texts) {
   if (text.includes(EM_DASH)) {
     failures.push(`${relative(file)} contains an em dash.`);
   }
-
 }
 
 // A comment in shipped code is one line, a provider quirk or a reason the code

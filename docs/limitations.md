@@ -26,17 +26,31 @@ Each adapter's README lists what Frame does not normalize. The ones that matter 
 
 ## What has run
 
-| Evidence                                                  | Expo adapter                       | Voltra iOS adapter | Android adapter |
-| --------------------------------------------------------- | ---------------------------------- | ------------------ | --------------- |
-| Unit tests against a fake modelled on a named SDK version | Yes                                | Yes                | Yes             |
-| Conformance suite                                         | Yes                                | Yes                | Yes             |
-| Type contracts against the real SDK's types               | Yes                                | Yes                | Yes             |
-| A native build on a simulator or emulator                 | iOS simulator, a development build | No                 | No              |
-| A physical device                                         | No                                 | No                 | No              |
+| Evidence                                                  | Expo adapter  | Voltra iOS adapter | Android adapter          |
+| --------------------------------------------------------- | ------------- | ------------------ | ------------------------ |
+| Unit tests against a fake modelled on a named SDK version | Yes           | Yes                | Yes                      |
+| Conformance suite                                         | Yes           | Yes                | Yes                      |
+| Type contracts against the real SDK's types               | Yes           | Yes                | Yes                      |
+| A native development build                                | iOS simulator | iOS simulator      | Android emulator, API 36 |
+| A rendered home screen widget                             | Yes           | Yes                | Yes                      |
+| A physical device                                         | No            | No                 | No                       |
 
-On the iOS simulator, the Expo adapter published a value to a real home screen widget, replaced it, moved it through a three entry schedule on its own while the app was in the background, and read back what the widget stores. A reload was acknowledged in an earlier run, before the last runtime changes, and was not repeated. These were runs by hand through the example app. They are not a test suite, and they are not evidence about WidgetKit's refresh budget over time.
+On 2026-10-30, the packed 0.1.0 candidates ran in an isolated native application with Expo 57.0.26 and React Native 0.86.3. The iOS runs used an iPhone 17 Pro simulator on iOS 26.5; Android used a Pixel 10 emulator on API 36.
 
-Nothing in this repository has run on a physical device, against the Voltra native module, or on Android.
+- **Expo, expo-widgets 57.0.22:** snapshots and replacements returned `submitted`, an equal value returned `unchanged`, invalid data was refused, reload returned `submitted`, and readback returned the replacement value. A three-entry timeline was submitted, and its final value appeared on the home screen while the application was in the background. An earlier run through `examples/expo` also exercised a context reset.
+- **Voltra, @use-voltra/ios-client 2.3.2:** snapshots, replacements, reload and a three-entry timeline returned `submitted`; duplicates answered `unchanged`, and invalid data answered `invalid`. The installed home screen widget displayed the first and final scheduled values while the application stayed in the background. Readback correctly answered `unavailable`.
+- **Android, react-native-android-widget 0.22.1:** an unplaced widget answered `skipped`. After placement, snapshots and replacements returned `submitted`, and the launcher visibly displayed the replacement value. A duplicate answered `unchanged`, invalid data was refused, and unsupported reload and readback answered `unavailable`.
+
+These are manual native smoke checks, separate from the automated test suite. They do not establish physical-device behavior, long-term refresh budgets, every widget family or every launcher. A provider call returning still does not prove that a later host redraw happened.
+
+## Native project setup
+
+The smoke application combined the three SDKs. Two upstream project-generation details needed app-level corrections:
+
+- The Expo Widgets and Voltra config plugins reused an `Info.plist` file reference across their two Xcode target groups. The generated project needed a separate reference for each target.
+- Android resolved WorkManager runtime 2.8.1 alongside its Kotlin extension 2.7.1, causing duplicate classes. Adding `androidx.work:work-runtime-ktx:2.8.1` to the application aligned the versions and allowed the build to complete.
+
+The iOS application and widget extensions also need their configured App Group entitlements. The initially unsigned simulator build could not access that shared storage; ad-hoc signing activated its configured entitlements. Frame configures none of these native settings.
 
 ## Not built
 

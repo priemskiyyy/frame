@@ -2,6 +2,8 @@
 
 A provider and hooks that read a Frame from React and React Native. They only observe: mounting a component opens no adapter, publishes nothing and calls no provider. They are safe in Strict Mode and on the server.
 
+Version 0.1.0 is an initial preview. APIs may change before 1.0. See the [verification limits](https://github.com/priemskiyyy/frame/blob/main/docs/limitations.md) before adopting an adapter.
+
 ## Installation
 
 ```sh

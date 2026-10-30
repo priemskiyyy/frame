@@ -25,16 +25,14 @@ jobs:
       - run: node scripts/verify-release.mjs
         env:
           RELEASE_TAG: ${{ github.event.release.tag_name }}
-      - name: Pack every package once, and checksum what was verified
+      - name: Check the verified archive checksums
         run: |
-          mkdir release
-          pnpm -r --filter "./packages/**" pack --pack-destination "$PWD/release"
-          cd release
-          sha256sum ./*.tgz > SHA256SUMS
+          cd .artifacts/release
+          sha256sum --check SHA256SUMS
       - uses: actions/upload-artifact@v4
         with:
           name: release
-          path: release
+          path: .artifacts/release/
 
   publish:
     needs: verify

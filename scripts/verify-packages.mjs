@@ -4,7 +4,9 @@
 // What passes here is what a consumer gets, not what the workspace links.
 import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
+import { createHash } from "node:crypto";
 import {
+  copyFileSync,
   existsSync,
   mkdirSync,
   mkdtempSync,
@@ -21,6 +23,7 @@ const workspace = fileURLToPath(new URL("..", import.meta.url));
 const scratch = mkdtempSync(path.join(tmpdir(), "frame-consumer-"));
 const tarballs = path.join(scratch, "tarballs");
 const consumer = path.join(scratch, "consumer");
+const release = path.join(workspace, ".artifacts", "release");
 
 const run = (command, args, cwd) => {
   const result = spawnSync(command, args, {
@@ -74,6 +77,7 @@ const CONSUMER_DEPENDENCIES = {
 };
 
 try {
+  rmSync(release, { recursive: true, force: true });
   mkdirSync(tarballs, { recursive: true });
   mkdirSync(path.join(consumer, "src"), { recursive: true });
 
@@ -386,6 +390,26 @@ export const mounted = createElement(FrameProvider, { frame });
   }
 
   assert.equal(failures.length, 0, failures.join("\n"));
+
+  mkdirSync(release, { recursive: true });
+
+  for (const { file } of packed) {
+    copyFileSync(file, path.join(release, path.basename(file)));
+  }
+
+  writeFileSync(
+    path.join(release, "SHA256SUMS"),
+    `${packed
+      .map(({ file }) => {
+        const checksum = createHash("sha256")
+          .update(readFileSync(file))
+          .digest("hex");
+
+        return `${checksum}  ${path.basename(file)}`;
+      })
+      .join("\n")}\n`,
+  );
+
   console.log(
     `${packages.length} packages packed, installed, imported, type-checked and linted as a consumer would.`,
   );

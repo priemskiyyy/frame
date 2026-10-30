@@ -12,7 +12,9 @@ Frame's packages are versioned together and published together. Nothing is publi
 
 ## The first release
 
-The `publish` workflow publishes through npm trusted publishing, which is configured per existing package, so the first version of each package is published by hand. Log in with `npm login`, then publish in dependency order from each package directory: `@priemskiyyy/frame`, then `-react`, `-expo`, `-voltra-ios` and `-android-widget`, each with `pnpm publish --access public`. Then add the trusted publisher on npmjs.com for each package: the repository `priemskiyyy/frame`, the workflow `publish.yml` and the environment `npm`. The repository must be public first, because provenance names it.
+The `publish` workflow publishes through npm trusted publishing, which is configured per existing package, so the first version of each package is published by hand. Log in with `npm login`, then publish the verified tarballs in dependency order: `@priemskiyyy/frame`, then `-react`, `-expo`, `-voltra-ios` and `-android-widget`, each with `npm publish <archive>.tgz --access public --tag next`. Then add the trusted publisher on npmjs.com for each package: the repository `priemskiyyy/frame`, the workflow `publish.yml` and the environment `npm`. The repository must be public first, because provenance names it.
+
+The initial 0.1.0 packages are previews. Inspect the resulting dist-tags and keep their verification limits in the package READMEs. The first publication can also acquire a `latest` alias, so the tag alone does not communicate preview status. Do not create a GitHub release for a version already bootstrapped by hand: its workflow would attempt to publish that immutable version again.
 
 ## A device run
 

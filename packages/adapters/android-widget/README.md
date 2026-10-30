@@ -2,6 +2,8 @@
 
 Android home screen widgets for Frame, over the `react-native-android-widget` you inject. A publication is a snapshot: the adapter lists the placed widgets of one kind, renders each with your function, and asks the SDK to update each one. It has no timeline, reload or readback, because the SDK has none, so those three answer `unavailable` on a widget this adapter hosts. Frame never initializes, configures or closes the SDK.
 
+Version 0.1.0 is an initial preview. APIs may change before 1.0. See the [verification limits](https://github.com/priemskiyyy/frame/blob/main/docs/limitations.md) before adopting an adapter.
+
 ## Installation
 
 ```sh
@@ -134,7 +136,9 @@ The rest:
 
 What ran: unit tests with an in-process fake modelled on react-native-android-widget 0.22.1 (`getWidgetInfo`, and `requestWidgetUpdateById`, which lists again, finds its id, awaits the render callback and draws); the conformance suite from `@priemskiyyy/frame/testing`, with its unavailability check answered through `available`; and type contracts compiled against the real installed 0.22.1 types, which prove the real module fits `AndroidWidgetsLike` and that a wrong object, or one with only `requestWidgetUpdate`, is refused.
 
-What did not run: an Android build, an emulator and a device. No test touched the SDK's native module, a launcher or the SDK's tree building, so the fake's draws are records, not pixels, and what the launcher shows is unverified.
+Native smoke check, 2026-10-30: the packed 0.1.0 candidate ran against the real 0.22.1 module in an Expo 57.0.26 development build on a Pixel 10 emulator, API 36. Before placement it answered `skipped`; after placement, snapshots and replacements returned `submitted`, and the launcher visibly displayed the replacement value. A duplicate answered `unchanged`, invalid data was refused, and unsupported operations answered `unavailable`. The combined application needed [aligned WorkManager dependencies](https://github.com/priemskiyyy/frame/blob/main/docs/limitations.md#native-project-setup).
+
+What did not run: a physical device, other launchers, resizing, click actions or long-term background behavior. The native smoke check is separate from the automated test suite.
 
 ## License
 

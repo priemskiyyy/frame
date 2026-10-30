@@ -75,7 +75,7 @@ The guides live in [`docs/`](docs):
 
 ## Status
 
-Nothing is published yet, and the API may still change before the first release. The adapters are tested against fakes modelled on named SDK versions and type-checked against the real SDKs. The Expo adapter has run on an iOS simulator; the Voltra and Android adapters have not run on a device or an emulator from this repository. Each adapter's README says exactly what ran.
+Version 0.1.0 is an initial preview. The API may change before 1.0. The adapters are tested against fakes modelled on named SDK versions and type-checked against the real SDKs. All three adapters have run in native simulator or emulator development builds, including rendered home screen widgets. Physical devices and long-term refresh budgets remain unverified. Each adapter's README and the [verification limits](docs/limitations.md) say exactly what ran.
 
 ## Development
 

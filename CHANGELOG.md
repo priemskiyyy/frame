@@ -4,9 +4,9 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ## [Unreleased]
 
-## [0.1.0] - Unreleased
+## [0.1.0] - 2026-10-30
 
-The first release, not published yet. The date is added when it is.
+Initial preview. The API may change before 1.0. See the documented native verification limits before choosing an adapter.
 
 ### Added
 
@@ -16,6 +16,7 @@ The first release, not published yet. The date is added when it is.
 - `@priemskiyyy/frame-voltra-ios`: iOS home screen widgets over Voltra's payload mode, with timeline and reload.
 - `@priemskiyyy/frame-android-widget`: Android home screen widgets over `react-native-android-widget`.
 - `examples/expo`: Frame Studio, a showcase app over a real widget and over the mock.
+- Native smoke checks for all three adapters, including rendered home screen widgets on iOS 26.5 and Android API 36; the verification limits record the operations and native setup corrections.
 
 [Unreleased]: https://github.com/priemskiyyy/frame/compare/v0.1.0...HEAD
 [0.1.0]: https://github.com/priemskiyyy/frame/releases/tag/v0.1.0
